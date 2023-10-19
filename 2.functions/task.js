@@ -104,10 +104,6 @@ function averageEvenElementsWorker(...arr) {
 
 
 function makeWork(arrOfArr, func) {
-  if (arrOfArr.length === 0) {
-    return 0;
-  }
-
   let maxWorkerResult = -Infinity; // Инициализация переменной максимального результата
   for (const arr of arrOfArr) {
     if (arr.length === 0) { // Проверка на пустой массив
