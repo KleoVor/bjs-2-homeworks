@@ -104,7 +104,7 @@ function averageEvenElementsWorker(...arr) {
 
 
 function makeWork(arrOfArr, func) {
-  if (arr.length === 0) {
+  if (arrOfArr.length === 0) {
     return 0;
   }
 
