@@ -118,7 +118,7 @@ class Student {
         this.marks = {};
     }
 
-    addMark(subject, mark) {
+    addMark(mark, subject) {
         if (mark < 2 || mark > 5) {
             console.log('Оценка должна быть в диапозоне от 2 до 5.');
             return;
@@ -130,7 +130,7 @@ class Student {
     }
 
     getAverageBySubject(subject) {
-        if (!this.marks[subject]) {
+        if (!this.marks.hasOwnProperty(subject) || !Array.isArray(this.marks[subject]) || this.marks[subject].length === 0) {
             return 0;
         }
         const subjectMarks = this.marks[subject];
@@ -141,6 +141,9 @@ class Student {
 
     getAverage() {
         const subjects = Object.keys(this.marks);
+        if (subjects.length === 0) {
+            return 0;
+        }
         const sumMarks = subjects.reduce((total, subject) => {
             return total + this.getAverageBySubject(subject)
         }, 0);
