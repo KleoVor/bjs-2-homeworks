@@ -88,13 +88,13 @@ class Library {
     findBookBy(type, value) {
         for (let i = 0; i < this.books.length; i++) {
             let book = this.books[i];
-            if (type === "автор" && book.author === value) {
+            if (type === "author" && book.author === value) {
                 return book;
-            } else if (type === "название" && book.name === value) {
+            } else if (type === 'name' && book.name === value) {
                 return book;
-            } else if (type === "год выпуска" && book.releaseDate === value) {
+            } else if (type === "releaseDate" && book.releaseDate === value) {
                 return book;
-            } else if (type === "тип" && book.type === value) {
+            } else if (type === "value" && book.type === value) {
                 return book;
             }
         }
@@ -102,10 +102,49 @@ class Library {
     }
 
     giveBookByName(bookName) {
-        const bookToRemove = this.findBookBy("название", bookName);
+        const bookToRemove = this.findBookBy("name", bookName);
         if (bookToRemove) {
             this.books = this.books.filter(book => book.name !== bookName);
         }
         return bookToRemove;
+    }
+}
+
+
+
+class Student {
+    constructor(name) {
+        this.name = name;
+        this.marks = {};
+    }
+
+    addMark(subject, mark) {
+        if (mark < 2 || mark > 5) {
+            console.log('Оценка должна быть в диапозоне от 2 до 5.');
+            return;
+        }
+        if (!this.marks[subject]) {
+            this.marks[subject] = [];
+        }
+        this.marks[subject].push(mark);
+    }
+
+    getAverageBySubject(subject) {
+        if (!this.marks[subject]) {
+            return 0;
+        }
+        const subjectMarks = this.marks[subject];
+        const sum = subjectMarks.reduce((total, mark) => total + mark, 0);
+        const avg = sum / subjectMarks.length;
+        return avg;
+    }
+
+    getAverage() {
+        const subjects = Object.keys(this.marks);
+        const sumMarks = subjects.reduce((total, subject) => {
+            return total + this.getAverageBySubject(subject)
+        }, 0);
+        const avg = sumMarks / subjects.length;
+        return avg;
     }
 }
